@@ -5,9 +5,7 @@
 
     <SolidColorBrush x:Key="BgBrush" Color="#363e41"/>
     <SolidColorBrush x:Key="FgBrush" Color="White"/>
-    <SolidColorBrush x:Key="IsMouseOverBrush" Color="Green"/>
-    <SolidColorBrush x:Key="IsPressedBrush" Color="DarkGreen"/>
-
+    <SolidColorBrush x:Key="IsMouseOverBrush" Color="DimGray"/>
     <ControlTemplate x:Key="ButtonTemplate" TargetType="Button">
         <Border x:Name="buttonBorder" 
                 BorderBrush="{TemplateBinding BorderBrush}"
@@ -25,7 +23,18 @@
                 <Setter Property="Background" TargetName="buttonBorder" Value="{StaticResource IsMouseOverBrush}"/>
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Background" TargetName="buttonBorder" Value="{StaticResource IsPressedBrush}"/>
+                <Setter Property="Background" 
+                        TargetName="buttonBorder">
+                    <Setter.Value>
+                        <LinearGradientBrush>
+                            <LinearGradientBrush.GradientStops>
+                                <GradientStop Offset="0.0" Color="{x:Static SystemColors.DesktopColor}" />
+                                <GradientStop Offset="1.0" Color="{x:Static SystemColors.ControlLightLightColor}" />
+                            </LinearGradientBrush.GradientStops>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+                        
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -59,20 +68,23 @@
                                        HorizontalAlignment="Center"
                                        FontSize="8pt"/>
                             <Button x:Name="PART_DecrementButton" 
-                                    Content="-" Grid.Row="0" 
+                                    Content="-" 
+                                    Grid.Row="0" 
                                     Grid.Column="0" 
                                     Grid.RowSpan="2" 
                                     Background="{TemplateBinding Background}"
                                     Foreground="{TemplateBinding Foreground}"
                                     FontSize="{TemplateBinding FontSize}"
                                     BorderThickness="{TemplateBinding BorderThickness}"
-                                    Template="{StaticResource ButtonTemplate}"/>
+                                    Template="{StaticResource ButtonTemplate}"
+                                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MyControl}}, Path=DecrementCommand}"/>
                             <TextBlock x:Name="PART_TextBlock" 
                                        Grid.Row="1" 
                                        Grid.Column="1" 
                                        HorizontalAlignment="Center" 
                                        VerticalAlignment="Center"
-                                       FontSize="{TemplateBinding FontSize}"/>
+                                       FontSize="{TemplateBinding FontSize}"
+                                       Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MyControl}}, Path=Counter}"/>
                             <Button x:Name="PART_IncrementButton" 
                                     Content="+" 
                                     Grid.Row="0" 
@@ -82,7 +94,8 @@
                                     Foreground="{TemplateBinding Foreground}"
                                     FontSize="{TemplateBinding FontSize}"
                                     BorderThickness="{TemplateBinding BorderThickness}"
-                                    Template="{StaticResource ButtonTemplate}">                                
+                                    Template="{StaticResource ButtonTemplate}"
+                                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MyControl}}, Path=IncrementCommand}">                                
                             </Button>
                         </Grid>
                     </Border>

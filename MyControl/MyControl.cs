@@ -46,18 +46,21 @@ namespace MyControl
     /// </summary>
     public class MyControl : Control
     {
-        private TextBlock _textBlock;
-        private int _counter = 0;
-        public int Counter { get { return _counter; } set { _counter = value; } }
+        public static readonly DependencyProperty CounterProperty;
+        public int Counter
+        {
+            get { return (int)GetValue(CounterProperty); }
+            set { SetValue(CounterProperty, value); }
+        }
         static MyControl()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MyControl), new FrameworkPropertyMetadata(typeof(MyControl)));
+            CounterProperty = DependencyProperty.Register("Counter", typeof(int), typeof(MyControl));
         }
-        public override void OnApplyTemplate()
-        {
-            _textBlock = GetTemplateChild("PART_TextBlock") as TextBlock;
-            _textBlock.Text = Counter.ToString();
-        }
-        
+        private void Increment(object o) => ++Counter;
+        private void Decrement(object o) { if (Counter > 0) --Counter; }
+        public ICommand IncrementCommand => new RelayCommand(Increment);
+        public ICommand DecrementCommand => new RelayCommand(Decrement);
+
     }
 }
