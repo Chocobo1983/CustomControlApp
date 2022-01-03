@@ -4,9 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CustomControlApp"
+        xmlns:viewmodel="clr-namespace:CustomControlApp.ViewModels"
+        xmlns:test="clr-namespace:CustomControlApp.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    
+    <Window.DataContext>
+        <viewmodel:ExampleViewModel/>               
+    </Window.DataContext>
     <Grid>
-        <MyControl:MyControl />
+        <MyControl:MyControl Counter="{Binding Counter}" viewmodel:RotationManager.Angle="{Binding Angle}"/>
+        <Button Content="Simple Button" HorizontalAlignment="Left" Margin="81,86,0,0" VerticalAlignment="Top" Command="{Binding RandomAngleCommand}"/>
     </Grid>
 </Window>

@@ -46,6 +46,7 @@
         <Setter Property="Height" Value="50"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="FontSize" Value="8pt"/>
+        <Setter Property="TextBlock.Text" Value="I'm a spin slider"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:MyControl}">
@@ -62,7 +63,7 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="0.5*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="I'm spin slider" 
+                            <TextBlock Text="{TemplateBinding TextBlock.Text}" 
                                        Grid.Row="0" 
                                        Grid.Column="1" 
                                        HorizontalAlignment="Center"
