@@ -12,12 +12,12 @@
         <viewmodel:ExampleViewModel/>               
     </Window.DataContext>
     <Grid>
-        <MyControl:MyControl Counter="{Binding Counter}" 
+        <MyControl:MyControl Counter="{Binding Counter}"
                              viewmodel:RotationManager.Angle="{Binding Angle}"/>
         <Button Content="Simple Button" 
                 HorizontalAlignment="Left" 
                 Margin="81,86,0,0" 
-                VerticalAlignment="Top" 
+                VerticalAlignment="Top"                
                 Command="{Binding RandomAngleCommand}"/>
     </Grid>
 </Window>

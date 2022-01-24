@@ -11,4 +11,10 @@
     <ProjectReference Include="..\MyControl\MyControl.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="ManagedHelpers">
+      <HintPath>..\MyControl\bin\Debug\net6.0-windows\ManagedHelpers.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
